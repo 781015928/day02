@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.mybatis.mapper.UserMapper">
+    <sql id="query_user_where">
+        <if test="userCustom!=null">
+            <if test="userCustom.sex!=null and userCustom.sex!='' ">
+                and user.sex = #{userCustom.sex}
+            </if>
+            <if test="userCustom.username!=null and userCustom.username!='' ">
+                and user.username like '%${userCustom.username}%'
+            </if>
+
+
+
+        </if>
+      <if test="ids!=null">
+          and
+          <foreach collection="ids" item="user_id" open=" (" close=")" separator="or">
+              id=#{user_id}
+          </foreach>
+      </if>
+
+    </sql>
+
+    <resultMap id="userResultMap" type="user">
+        <id column="id_" property="id"/>
+        <result column="username_" property="username"/>
+
+        <result column="sex_" property="sex"/>
+        <result column="birthday_" property="birthday"/>
+        <result column="address_" property="address"/>
+    </resultMap>
+    <!--sql 语句
+    id statement id
+    sql 语句会封装到mappedStatement 对象中
+    -->
+    <select id="findUserById"
+            parameterType="int"
+            resultType="user"
+    >
+        SELECT *
+        FROM USER
+            WHERE id = #{id}
+
+
+    </select>
+    <select id="findAll"
+            resultType="user"
+    >
+        SELECT *
+        FROM USER
+    </select>
+
+    <select id="findUserByName"
+            parameterType="string"
+            resultType="user"
+    >
+        SELECT *
+        FROM USER
+        WHERE username LIKE '%${value}%'
+
+    </select>
+
+    <insert id="insertUser"
+            parameterType="user"
+    >
+        <selectKey keyProperty="id"
+                   order="AFTER"
+                   resultType="java.lang.Integer"
+        >
+            SELECT LAST_INSERT_ID()
+
+        </selectKey>
+        insert into user( username, birthday, sex,address )value(
+        #{username},#{birthday},#{sex},#{address}
+        )
+    </insert>
+    <update id="updateUserById"
+            parameterType="user"
+    >
+        UPDATE user
+        SET
+        username = #{username},
+        birthday = #{birthday},
+        sex      = #{sex},
+        address  = #{address}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUserById"
+            parameterType="int"
+    >
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findUserList"
+            parameterType="UserQueryVo"
+            resultType="userCustom"
+    >
+        SELECT * from USER
+        <where>
+            <include refid="query_user_where"/>
+        </where>
+
+
+    </select>
+
+    <select id="findUserCount"
+            parameterType="UserQueryVo"
+            resultType="int"
+    >
+        SELECT COUNT(*) FROM USER
+
+        <where>
+            <include refid="query_user_where"/>
+        </where>
+
+    </select>
+
+
+    <select id="findUserByIdResultMap" parameterType="int" resultMap="userResultMap">
+        SELECT id id_,username username_ , sex sex_  ,birthday birthday_ ,address address_ FROM USER WHERE id=#{value}
+    </select>
+
+
+    <select id="findUserByIds" parameterType="UserQueryVo" resultType="userCustom">
+        SELECT * FROM USER
+        <where>
+            <include refid="query_user_where"/>
+        </where>
+    </select>
+
+
+</mapper>
