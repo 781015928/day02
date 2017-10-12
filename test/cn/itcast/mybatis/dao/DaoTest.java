@@ -1,18 +1,18 @@
 package cn.itcast.mybatis.dao;
 
+import cn.itcast.mybatis.SqlSessionUtils;
+import cn.itcast.mybatis.mapper.OrdersCustomMapper;
+import cn.itcast.mybatis.mapper.UserMapper;
+import cn.itcast.mybatis.pojo.Orders;
+import cn.itcast.mybatis.pojo.User;
+import cn.itcast.mybatis.pojo.UserCustom;
+import cn.itcast.mybatis.pojo.UserQueryVo;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import cn.itcast.mybatis.SqlSessionUtils;
-import cn.itcast.mybatis.mapper.OrdersCustomMapper;
-import cn.itcast.mybatis.mapper.UserMapper;
-import cn.itcast.mybatis.pojo.User;
-import cn.itcast.mybatis.pojo.UserCustom;
-import cn.itcast.mybatis.pojo.UserQueryVo;
 
 /**
  * Created by czg on 2017/10/10.
@@ -126,5 +126,22 @@ public class DaoTest {
         OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
 
         ordersCustomMapper.findUserItem().forEach((userCustom -> System.out.println(userCustom)));
+    }
+    @Test
+    public void findOrderUserLazyLoading() throws Exception {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSessionFactory().openSession();
+        OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+        List<Orders> orderUserLazyLoading = ordersCustomMapper.findOrderUserLazyLoading();
+        for (Orders orders: orderUserLazyLoading){
+            User user = orders.getUser();
+        }
+
+
+
+
+
+
+
+
     }
 }

@@ -18,6 +18,7 @@
       <root url="jar://$USER_HOME$/.ideaLibSources/log4j-1.2.17-sources.jar!/" />
       <root url="jar://D:/BaiduNetdiskDownload/C100_SpringMVC+Spring+MyBatis视频教程/1.Springmvc+Mybatis由浅入深全套视频教程/mybatis/day01/res/jar包/mybatis-3.2.7-source.zip!/mybatis-3-mybatis-3.2.7/src/main/java" />
       <root url="jar://D:/BaiduNetdiskDownload/C100_SpringMVC+Spring+MyBatis视频教程/1.Springmvc+Mybatis由浅入深全套视频教程/mybatis/day01/res/jar包/mybatis-3.2.7-source.zip!/mybatis-3-mybatis-3.2.7/src/test/java" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/mybatis-3.2.7-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
