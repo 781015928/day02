@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import cn.itcast.mybatis.SqlSessionUtils;
+import cn.itcast.mybatis.mapper.OrdersCustomMapper;
 import cn.itcast.mybatis.mapper.UserMapper;
 import cn.itcast.mybatis.pojo.User;
 import cn.itcast.mybatis.pojo.UserCustom;
@@ -90,5 +91,40 @@ public class DaoTest {
         userQueryVo.setIds(ids);
         userQueryVo.setUserCustom(userCustom);
        userMapper.findUserByIds(userQueryVo).forEach((user -> System.out.println(user)));
+    }
+    @Test
+    public void findOrdersUser() throws Exception {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSessionFactory().openSession();
+        OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+
+        ordersCustomMapper.findOrdersUser().forEach((ordersCustom -> System.out.println(ordersCustom)));
+    }
+    @Test
+    public void OrdersUserResultMap() throws Exception {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSessionFactory().openSession();
+        OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+
+        ordersCustomMapper.findOrdersUserResultMap().forEach((ordersCustom -> System.out.println(ordersCustom)));
+    }
+    @Test
+    public void findOrdersUserOrderDetail() throws Exception {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSessionFactory().openSession();
+        OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+
+        ordersCustomMapper.findOrdersUserOrderDetail().forEach((ordersCustom -> System.out.println(ordersCustom)));
+    }
+    @Test
+    public void findOrdersUserOrderItem() throws Exception {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSessionFactory().openSession();
+        OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+
+        ordersCustomMapper.findOrdersUserOrderItem().forEach((ordersCustom -> System.out.println(ordersCustom)));
+    }
+    @Test
+    public void findUserItem() throws Exception {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSessionFactory().openSession();
+        OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+
+        ordersCustomMapper.findUserItem().forEach((userCustom -> System.out.println(userCustom)));
     }
 }

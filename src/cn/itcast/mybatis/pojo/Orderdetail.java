@@ -53,10 +53,14 @@ public class Orderdetail {
 		this.items = items;
 	}
 
-	@Override
-	public String toString() {
-		return "Orderdetail [id=" + id + ", ordersId=" + ordersId
-				+ ", itemsId=" + itemsId + ", itemsNum=" + itemsNum + "]";
-	}
-    
+    @Override
+    public String toString() {
+        return "Orderdetail{" +
+                "id=" + id +
+                ", ordersId=" + ordersId +
+                ", itemsId=" + itemsId +
+                ", itemsNum=" + itemsNum +
+                ", items=" + items +
+                '}';
+    }
 }

@@ -1,6 +1,12 @@
 package cn.itcast.mybatis.mapper;
 
 
+import java.util.List;
+
+import cn.itcast.mybatis.pojo.Orders;
+import cn.itcast.mybatis.pojo.OrdersCustom;
+import cn.itcast.mybatis.pojo.UserCustom;
+
 /**
  * 
  * <p>Title: OrdersMapperCustom</p>
@@ -11,6 +17,10 @@ package cn.itcast.mybatis.mapper;
  * @version 1.0
  */
 public interface OrdersCustomMapper {
-	void findOrdersUser();
+	List<OrdersCustom> findOrdersUser();
+	List<Orders> findOrdersUserResultMap();
+	List<Orders> findOrdersUserOrderDetail();
+	List<Orders> findOrdersUserOrderItem();
+	List<UserCustom> findUserItem();
 
 }
